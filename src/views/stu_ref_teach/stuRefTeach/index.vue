@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <el-select v-model="query.sId" class="filter-item"
+      <el-select v-model="query.stuId" class="filter-item"
                  style="width:200px;" placeholder="学生ID"
                  filterable clearable>
         <el-option v-for="item in options.student"
@@ -10,7 +10,7 @@
                    :value="item.key">
         </el-option>
       </el-select>
-      <el-select v-model="query.tId" class="filter-item"
+      <el-select v-model="query.teacherId" class="filter-item"
                  style="width:200px;" placeholder="老师ID"
                  filterable clearable>
         <el-option v-for="item in options.teacher"
@@ -62,10 +62,10 @@
         </template>
       </el-table-column>
       <el-table-column label="老师ID"
-                       prop="tId"
+                       prop="teacherId"
                        align="center" width="150">
         <template slot-scope="{row}">
-          <span>{{ row.tId }}</span>
+          <span>{{ row.teacherId }}</span>
         </template>
       </el-table-column>
       <el-table-column label="姓名"
@@ -100,16 +100,16 @@
         </template>
       </el-table-column>
     </el-table>
-    <pagination v-show="total>0" :total="total" :page.sync="query.page"
-                :limit.sync="query.limit" @pagination="doQueryList"/>
+    <pagination v-show="total>0" :total="total" :page.sync="query.currentPage"
+                :limit.sync="query.pageSize" @pagination="doQueryList"/>
     <!-- 新建表单 -->
-    <stuRefTeach-add ref="stuRefTeachAdd" @created="doQueryList({ page: 1 })"/>
+    <stuRefTeach-add ref="stuRefTeachAdd" @created="doQueryList({ currentPage: 1 })"/>
     <!-- 编辑表单 -->
     <stuRefTeach-edit ref="stuRefTeachEdit" @updated="doQueryList({})"/>
     <!-- 查看表单 -->
     <stuRefTeach-show ref="stuRefTeachShow"/>
     <!-- 查看表单 -->
-    <stuRefTeach-import ref="stuRefTeachImport" @imported="doQueryList({ page: 1 })"/>
+    <stuRefTeach-import ref="stuRefTeachImport" @imported="doQueryList({ currentPage: 1 })"/>
   </div>
 </template>
 
@@ -142,16 +142,16 @@ export default {
       total: 0,
       listLoading: true,
       query: {
-        page: 1,
-        limit: 10,
-        sId: null,
-        tId: null
+        currentPage: 1,
+        pageSize: 10,
+        stuId: null,
+        teacherId: null
       },
       selectItems: []
     }
   },
   created() {
-    this.doQueryList({ page: 1 })
+    this.doQueryList({ currentPage: 1 })
     studentApi.findOptions().then(data => { this.options.student = data })
     teacherApi.findOptions().then(data => { this.options.teacher = data })
   },
@@ -166,17 +166,17 @@ export default {
      * 触发搜索操作
      */
     handleQuery() {
-      this.doQueryList({ page: 1 })
+      this.doQueryList({ currentPage: 1 })
     },
     /**
      * 执行列表查询
      */
-    doQueryList({ page, limit }) {
-      if (page) {
-        this.query.page = page
+    doQueryList({ currentPage, pageSize }) {
+      if (currentPage) {
+        this.query.currentPage = currentPage
       }
-      if (limit) {
-        this.query.limit = limit
+      if (pageSize) {
+        this.query.pageSize = pageSize
       }
       this.listLoading = true
       return stuRefTeachApi.fetchList(this.query)
@@ -196,7 +196,7 @@ export default {
         .then(() => stuRefTeachApi.deleteById(row.id))
         .then(() => {
           this.$common.showMsg('success', '删除成功')
-          return this.doQueryList({ page: 1 })
+          return this.doQueryList({ currentPage: 1 })
         })
     },
     /**
@@ -211,7 +211,7 @@ export default {
         .then(() => stuRefTeachApi.deleteBatch(this.selectItems.map(row => row.id)))
         .then(() => {
           this.$common.showMsg('success', '删除成功')
-          return this.doQueryList({ page: 1 })
+          return this.doQueryList({ currentPage: 1 })
         })
     },
     /**

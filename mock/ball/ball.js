@@ -20,7 +20,7 @@ function initMockDataStage1() {
   data = Mock.mock({
     'list|20': [{
       'id|+1': 1,
-      'bName': '@word(1, 10)',
+      'ballName': '@word(1, 10)',
       'price|0-100': 1
     }]
   })
@@ -72,7 +72,7 @@ const reqMocks = [
     type: 'get',
     response: ({ query }) => {
       // 列表分页
-      const page = paging(data.list, query.page, query.limit)
+      const page = paging(data.list, query.currentPage, query.pageSize)
       return {
         total: data.list.length,
         list: copy(page)

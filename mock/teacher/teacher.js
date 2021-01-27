@@ -21,7 +21,7 @@ function initMockDataStage1() {
     'list|20': [{
       'id|+1': 1,
       'subject': '@word(1, 10)',
-      'tName': '@word(1, 10)'
+      'teacherName': '@word(1, 10)'
     }]
   })
 }
@@ -72,7 +72,7 @@ const reqMocks = [
     type: 'get',
     response: ({ query }) => {
       // 列表分页
-      const page = paging(data.list, query.page, query.limit)
+      const page = paging(data.list, query.currentPage, query.pageSize)
       return {
         total: data.list.length,
         list: copy(page)
@@ -86,7 +86,7 @@ const reqMocks = [
     response: () => {
       return data.list.map(item => ({
         key: item.id,
-        value: item.tName
+        value: item.teacherName
       }))
     }
   },

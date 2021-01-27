@@ -4,12 +4,12 @@
       <el-input v-model="query.id" placeholder="主键"
                 style="width: 200px;" class="filter-item"
                 @keyup.enter.native="handleQuery"/>
-      <el-input v-model="query.bName" placeholder="球类名称"
+      <el-input v-model="query.ballName" placeholder="球类名称"
                 style="width: 200px;" class="filter-item"
                 @keyup.enter.native="handleQuery"/>
-      <el-input v-model="query.price" placeholder="价钱"
-                style="width: 200px;" class="filter-item"
-                @keyup.enter.native="handleQuery"/>
+      <el-input-number v-model="query.price" placeholder="价钱"
+                       style="width:200px;" class="filter-item"
+                       controls-position="right"></el-input-number>
       <el-button class="filter-item" icon="el-icon-search" type="primary"
                  @click="handleQuery">
         搜索
@@ -36,10 +36,10 @@
         </template>
       </el-table-column>
       <el-table-column label="球类名称"
-                       prop="bName"
+                       prop="ballName"
                        align="center" width="100">
         <template slot-scope="{row}">
-          <span>{{ row.bName }}</span>
+          <span>{{ row.ballName }}</span>
         </template>
       </el-table-column>
       <el-table-column label="价钱"
@@ -60,10 +60,10 @@
         </template>
       </el-table-column>
     </el-table>
-    <pagination v-show="total>0" :total="total" :page.sync="query.page"
-                :limit.sync="query.limit" @pagination="doQueryList"/>
+    <pagination v-show="total>0" :total="total" :page.sync="query.currentPage"
+                :limit.sync="query.pageSize" @pagination="doQueryList"/>
     <!-- 新建表单 -->
-    <ball-add ref="ballAdd" @created="doQueryList({ page: 1 })"/>
+    <ball-add ref="ballAdd" @created="doQueryList({ currentPage: 1 })"/>
     <!-- 编辑表单 -->
     <ball-edit ref="ballEdit" @updated="doQueryList({})"/>
     <!-- 查看表单 -->
@@ -92,17 +92,17 @@ export default {
       total: 0,
       listLoading: true,
       query: {
-        page: 1,
-        limit: 10,
+        currentPage: 1,
+        pageSize: 10,
         id: null,
-        bName: null,
-        price: null
+        ballName: null,
+        price: undefined
       },
       selectItems: []
     }
   },
   created() {
-    this.doQueryList({ page: 1 })
+    this.doQueryList({ currentPage: 1 })
   },
   methods: {
     /**
@@ -115,17 +115,17 @@ export default {
      * 触发搜索操作
      */
     handleQuery() {
-      this.doQueryList({ page: 1 })
+      this.doQueryList({ currentPage: 1 })
     },
     /**
      * 执行列表查询
      */
-    doQueryList({ page, limit }) {
-      if (page) {
-        this.query.page = page
+    doQueryList({ currentPage, pageSize }) {
+      if (currentPage) {
+        this.query.currentPage = currentPage
       }
-      if (limit) {
-        this.query.limit = limit
+      if (pageSize) {
+        this.query.pageSize = pageSize
       }
       this.listLoading = true
       return ballApi.fetchList(this.query)
@@ -145,7 +145,7 @@ export default {
         .then(() => ballApi.deleteById(row.id))
         .then(() => {
           this.$common.showMsg('success', '删除成功')
-          return this.doQueryList({ page: 1 })
+          return this.doQueryList({ currentPage: 1 })
         })
     },
     /**
@@ -160,7 +160,7 @@ export default {
         .then(() => ballApi.deleteBatch(this.selectItems.map(row => row.id)))
         .then(() => {
           this.$common.showMsg('success', '删除成功')
-          return this.doQueryList({ page: 1 })
+          return this.doQueryList({ currentPage: 1 })
         })
     },
     /**

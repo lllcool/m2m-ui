@@ -41,8 +41,8 @@ export default {
     return {
       form: {
         id: null,
-        sId: null,
-        tId: null
+        stuId: null,
+        teacherId: null
       },
       formVisible: false
     }

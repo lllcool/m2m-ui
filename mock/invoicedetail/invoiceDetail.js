@@ -75,7 +75,7 @@ const reqMocks = [
     type: 'get',
     response: ({ query }) => {
       // 列表分页
-      const page = paging(data.list, query.page, query.limit)
+      const page = paging(data.list, query.currentPage, query.pageSize)
       return {
         total: data.list.length,
         list: copy(page)

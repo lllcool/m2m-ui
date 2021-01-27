@@ -81,16 +81,16 @@
         </template>
       </el-table-column>
     </el-table>
-    <pagination v-show="total>0" :total="total" :page.sync="query.page"
-                :limit.sync="query.limit" @pagination="doQueryList"/>
+    <pagination v-show="total>0" :total="total" :page.sync="query.currentPage"
+                :limit.sync="query.pageSize" @pagination="doQueryList"/>
     <!-- 新建表单 -->
-    <invoiceDetail-add ref="invoiceDetailAdd" @created="doQueryList({ page: 1 })"/>
+    <invoiceDetail-add ref="invoiceDetailAdd" @created="doQueryList({ currentPage: 1 })"/>
     <!-- 编辑表单 -->
     <invoiceDetail-edit ref="invoiceDetailEdit" @updated="doQueryList({})"/>
     <!-- 查看表单 -->
     <invoiceDetail-show ref="invoiceDetailShow"/>
     <!-- 查看表单 -->
-    <invoiceDetail-import ref="invoiceDetailImport" @imported="doQueryList({ page: 1 })"/>
+    <invoiceDetail-import ref="invoiceDetailImport" @imported="doQueryList({ currentPage: 1 })"/>
   </div>
 </template>
 
@@ -121,8 +121,8 @@ export default {
       total: 0,
       listLoading: true,
       query: {
-        page: 1,
-        limit: 10,
+        currentPage: 1,
+        pageSize: 10,
         people: null,
         invoiceId: null
       },
@@ -130,7 +130,7 @@ export default {
     }
   },
   created() {
-    this.doQueryList({ page: 1 })
+    this.doQueryList({ currentPage: 1 })
     invoiceApi.findOptions().then(data => { this.options.invoice = data })
   },
   methods: {
@@ -144,17 +144,17 @@ export default {
      * 触发搜索操作
      */
     handleQuery() {
-      this.doQueryList({ page: 1 })
+      this.doQueryList({ currentPage: 1 })
     },
     /**
      * 执行列表查询
      */
-    doQueryList({ page, limit }) {
-      if (page) {
-        this.query.page = page
+    doQueryList({ currentPage, pageSize }) {
+      if (currentPage) {
+        this.query.currentPage = currentPage
       }
-      if (limit) {
-        this.query.limit = limit
+      if (pageSize) {
+        this.query.pageSize = pageSize
       }
       this.listLoading = true
       return invoiceDetailApi.fetchList(this.query)
@@ -174,7 +174,7 @@ export default {
         .then(() => invoiceDetailApi.deleteById(row.id))
         .then(() => {
           this.$common.showMsg('success', '删除成功')
-          return this.doQueryList({ page: 1 })
+          return this.doQueryList({ currentPage: 1 })
         })
     },
     /**
@@ -189,7 +189,7 @@ export default {
         .then(() => invoiceDetailApi.deleteBatch(this.selectItems.map(row => row.id)))
         .then(() => {
           this.$common.showMsg('success', '删除成功')
-          return this.doQueryList({ page: 1 })
+          return this.doQueryList({ currentPage: 1 })
         })
     },
     /**

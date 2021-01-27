@@ -65,16 +65,16 @@
         </template>
       </el-table-column>
     </el-table>
-    <pagination v-show="total>0" :total="total" :page.sync="query.page"
-                :limit.sync="query.limit" @pagination="doQueryList"/>
+    <pagination v-show="total>0" :total="total" :page.sync="query.currentPage"
+                :limit.sync="query.pageSize" @pagination="doQueryList"/>
     <!-- 新建表单 -->
-    <student-add ref="studentAdd" @created="doQueryList({ page: 1 })"/>
+    <student-add ref="studentAdd" @created="doQueryList({ currentPage: 1 })"/>
     <!-- 编辑表单 -->
     <student-edit ref="studentEdit" @updated="doQueryList({})"/>
     <!-- 查看表单 -->
     <student-show ref="studentShow"/>
     <!-- 查看表单 -->
-    <student-import ref="studentImport" @imported="doQueryList({ page: 1 })"/>
+    <student-import ref="studentImport" @imported="doQueryList({ currentPage: 1 })"/>
   </div>
 </template>
 
@@ -101,8 +101,8 @@ export default {
       total: 0,
       listLoading: true,
       query: {
-        page: 1,
-        limit: 10,
+        currentPage: 1,
+        pageSize: 10,
         name: null,
         age: null
       },
@@ -110,7 +110,7 @@ export default {
     }
   },
   created() {
-    this.doQueryList({ page: 1 })
+    this.doQueryList({ currentPage: 1 })
   },
   methods: {
     /**
@@ -123,17 +123,17 @@ export default {
      * 触发搜索操作
      */
     handleQuery() {
-      this.doQueryList({ page: 1 })
+      this.doQueryList({ currentPage: 1 })
     },
     /**
      * 执行列表查询
      */
-    doQueryList({ page, limit }) {
-      if (page) {
-        this.query.page = page
+    doQueryList({ currentPage, pageSize }) {
+      if (currentPage) {
+        this.query.currentPage = currentPage
       }
-      if (limit) {
-        this.query.limit = limit
+      if (pageSize) {
+        this.query.pageSize = pageSize
       }
       this.listLoading = true
       return studentApi.fetchList(this.query)
@@ -153,7 +153,7 @@ export default {
         .then(() => studentApi.deleteById(row.id))
         .then(() => {
           this.$common.showMsg('success', '删除成功')
-          return this.doQueryList({ page: 1 })
+          return this.doQueryList({ currentPage: 1 })
         })
     },
     /**
@@ -168,7 +168,7 @@ export default {
         .then(() => studentApi.deleteBatch(this.selectItems.map(row => row.id)))
         .then(() => {
           this.$common.showMsg('success', '删除成功')
-          return this.doQueryList({ page: 1 })
+          return this.doQueryList({ currentPage: 1 })
         })
     },
     /**

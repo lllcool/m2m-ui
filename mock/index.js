@@ -8,7 +8,6 @@ import teacher from './teacher/teacher'
 import student from './student/student'
 import stuRefTeach from './stu_ref_teach/stuRefTeach'
 import ball from './ball/ball'
-import member from './member/member'
 
 function initMockData() {
   invoice.initMockDataStage1()
@@ -17,14 +16,12 @@ function initMockData() {
   student.initMockDataStage1()
   stuRefTeach.initMockDataStage1()
   ball.initMockDataStage1()
-  member.initMockDataStage1()
   invoice.initMockDataStage2()
   invoiceDetail.initMockDataStage2()
   teacher.initMockDataStage2()
   student.initMockDataStage2()
   stuRefTeach.initMockDataStage2()
   ball.initMockDataStage2()
-  member.initMockDataStage2()
 }
 
 const reqMocks = [
@@ -34,8 +31,7 @@ const reqMocks = [
   ...teacher.reqMocks,
   ...student.reqMocks,
   ...stuRefTeach.reqMocks,
-  ...ball.reqMocks,
-  ...member.reqMocks
+  ...ball.reqMocks
 ]
 
 // for front mock

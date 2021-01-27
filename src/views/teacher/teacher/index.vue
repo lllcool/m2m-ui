@@ -4,7 +4,7 @@
       <el-input v-model="query.subject" placeholder="科目"
                 style="width: 200px;" class="filter-item"
                 @keyup.enter.native="handleQuery"/>
-      <el-input v-model="query.tName" placeholder="名字"
+      <el-input v-model="query.teacherName" placeholder="名字"
                 style="width: 200px;" class="filter-item"
                 @keyup.enter.native="handleQuery"/>
       <el-button class="filter-item" icon="el-icon-search" type="primary"
@@ -48,10 +48,10 @@
         </template>
       </el-table-column>
       <el-table-column label="名字"
-                       prop="tName"
+                       prop="teacherName"
                        align="center" width="150">
         <template slot-scope="{row}">
-          <span>{{ row.tName }}</span>
+          <span>{{ row.teacherName }}</span>
         </template>
       </el-table-column>
       <el-table-column label="操作" align="center" width="230">
@@ -65,16 +65,16 @@
         </template>
       </el-table-column>
     </el-table>
-    <pagination v-show="total>0" :total="total" :page.sync="query.page"
-                :limit.sync="query.limit" @pagination="doQueryList"/>
+    <pagination v-show="total>0" :total="total" :page.sync="query.currentPage"
+                :limit.sync="query.pageSize" @pagination="doQueryList"/>
     <!-- 新建表单 -->
-    <teacher-add ref="teacherAdd" @created="doQueryList({ page: 1 })"/>
+    <teacher-add ref="teacherAdd" @created="doQueryList({ currentPage: 1 })"/>
     <!-- 编辑表单 -->
     <teacher-edit ref="teacherEdit" @updated="doQueryList({})"/>
     <!-- 查看表单 -->
     <teacher-show ref="teacherShow"/>
     <!-- 查看表单 -->
-    <teacher-import ref="teacherImport" @imported="doQueryList({ page: 1 })"/>
+    <teacher-import ref="teacherImport" @imported="doQueryList({ currentPage: 1 })"/>
   </div>
 </template>
 
@@ -101,16 +101,16 @@ export default {
       total: 0,
       listLoading: true,
       query: {
-        page: 1,
-        limit: 10,
+        currentPage: 1,
+        pageSize: 10,
         subject: null,
-        tName: null
+        teacherName: null
       },
       selectItems: []
     }
   },
   created() {
-    this.doQueryList({ page: 1 })
+    this.doQueryList({ currentPage: 1 })
   },
   methods: {
     /**
@@ -123,17 +123,17 @@ export default {
      * 触发搜索操作
      */
     handleQuery() {
-      this.doQueryList({ page: 1 })
+      this.doQueryList({ currentPage: 1 })
     },
     /**
      * 执行列表查询
      */
-    doQueryList({ page, limit }) {
-      if (page) {
-        this.query.page = page
+    doQueryList({ currentPage, pageSize }) {
+      if (currentPage) {
+        this.query.currentPage = currentPage
       }
-      if (limit) {
-        this.query.limit = limit
+      if (pageSize) {
+        this.query.pageSize = pageSize
       }
       this.listLoading = true
       return teacherApi.fetchList(this.query)
@@ -153,7 +153,7 @@ export default {
         .then(() => teacherApi.deleteById(row.id))
         .then(() => {
           this.$common.showMsg('success', '删除成功')
-          return this.doQueryList({ page: 1 })
+          return this.doQueryList({ currentPage: 1 })
         })
     },
     /**
@@ -168,7 +168,7 @@ export default {
         .then(() => teacherApi.deleteBatch(this.selectItems.map(row => row.id)))
         .then(() => {
           this.$common.showMsg('success', '删除成功')
-          return this.doQueryList({ page: 1 })
+          return this.doQueryList({ currentPage: 1 })
         })
     },
     /**

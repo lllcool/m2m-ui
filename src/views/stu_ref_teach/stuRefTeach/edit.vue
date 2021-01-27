@@ -3,8 +3,8 @@
     <el-form ref="dataForm" :rules="formRules" :model="form"
              label-position="left" size="small"
              label-width="100px" style="width: 400px; margin-left:50px;">
-      <el-form-item label="学生ID" prop="sId">
-        <el-select v-model="form.sId"
+      <el-form-item label="学生ID" prop="stuId">
+        <el-select v-model="form.stuId"
                    style="width:100%;" placeholder="请选择"
                    filterable clearable>
           <el-option v-for="item in options.student"
@@ -14,8 +14,8 @@
           </el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="老师ID" prop="tId">
-        <el-select v-model="form.tId"
+      <el-form-item label="老师ID" prop="teacherId">
+        <el-select v-model="form.teacherId"
                    style="width:100%;" placeholder="请选择"
                    filterable clearable>
           <el-option v-for="item in options.teacher"
@@ -46,8 +46,8 @@ import teacherApi from '@/api/teacher/teacher'
 function initFormBean() {
   const formBean = {
     id: null,
-    sId: null,
-    tId: null
+    stuId: null,
+    teacherId: null
   }
   return formBean
 }
@@ -64,9 +64,9 @@ export default {
       form: initFormBean(),
       formVisible: false,
       formRules: {
-        sId: [
+        stuId: [
         ],
-        tId: [
+        teacherId: [
         ]
       }
     }

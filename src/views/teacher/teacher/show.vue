@@ -15,7 +15,7 @@
       </el-form-item>
       <el-form-item label="名字">
         <span class="form-item-show">
-          {{ form.tName }}
+          {{ form.teacherName }}
         </span>
       </el-form-item>
     </el-form>
@@ -37,7 +37,7 @@ export default {
       form: {
         id: null,
         subject: null,
-        tName: null
+        teacherName: null
       },
       formVisible: false
     }

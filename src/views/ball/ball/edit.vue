@@ -3,11 +3,11 @@
     <el-form ref="dataForm" :rules="formRules" :model="form"
              label-position="left" size="small"
              label-width="100px" style="width: 400px; margin-left:50px;">
-      <el-form-item label="球类名称" prop="bName">
-        <el-input v-model="form.bName"/>
+      <el-form-item label="球类名称" prop="ballName">
+        <el-input v-model="form.ballName"/>
       </el-form-item>
       <el-form-item label="价钱" prop="price">
-        <el-input v-model="form.price"/>
+        <el-input-number v-model="form.price" style="width:100%;" controls-position="right"></el-input-number>
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -28,7 +28,7 @@ import ballApi from '@/api/ball/ball'
 function initFormBean() {
   const formBean = {
     id: null,
-    bName: null,
+    ballName: null,
     price: null
   }
   return formBean
@@ -42,12 +42,11 @@ export default {
       form: initFormBean(),
       formVisible: false,
       formRules: {
-        bName: [
+        ballName: [
           { required: true, message: '请输入球类名称', trigger: 'blur' },
           { max: 10, message: '长度不能超过10个字符', trigger: 'blur' }
         ],
         price: [
-          { max: 5, message: '长度不能超过5个字符', trigger: 'blur' }
         ]
       }
     }

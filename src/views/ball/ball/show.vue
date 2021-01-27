@@ -10,7 +10,7 @@
       </el-form-item>
       <el-form-item label="球类名称">
         <span class="form-item-show">
-          {{ form.bName }}
+          {{ form.ballName }}
         </span>
       </el-form-item>
       <el-form-item label="价钱">
@@ -36,7 +36,7 @@ export default {
     return {
       form: {
         id: null,
-        bName: null,
+        ballName: null,
         price: null
       },
       formVisible: false

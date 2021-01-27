@@ -6,8 +6,8 @@
       <el-form-item label="科目" prop="subject">
         <el-input v-model="form.subject"/>
       </el-form-item>
-      <el-form-item label="名字" prop="tName">
-        <el-input v-model="form.tName"/>
+      <el-form-item label="名字" prop="teacherName">
+        <el-input v-model="form.teacherName"/>
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -29,7 +29,7 @@ function initFormBean() {
   const formBean = {
     id: null,
     subject: null,
-    tName: null
+    teacherName: null
   }
   return formBean
 }
@@ -45,7 +45,7 @@ export default {
         subject: [
           { max: 10, message: '长度不能超过10个字符', trigger: 'blur' }
         ],
-        tName: [
+        teacherName: [
           { max: 10, message: '长度不能超过10个字符', trigger: 'blur' }
         ]
       }
