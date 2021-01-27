@@ -114,6 +114,30 @@ export const constantRoutes = [
       }
     ]
   },
+  {
+    path: '/ball',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'Ball',
+        component: () => import('@/views/ball/ball'),
+        meta: { title: 'Ball管理', icon: 'table' }
+      }
+    ]
+  },
+  {
+    path: '/member',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'Member',
+        component: () => import('@/views/member/member'),
+        meta: { title: 'Member管理', icon: 'table' }
+      }
+    ]
+  },
 
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
