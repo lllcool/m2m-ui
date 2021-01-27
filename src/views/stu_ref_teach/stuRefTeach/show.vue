@@ -10,17 +10,17 @@
       </el-form-item>
       <el-form-item label="姓名">
         <span class="form-item-show">
-          {{ form.sName }}
+          {{ form.stuName }}
         </span>
       </el-form-item>
       <el-form-item label="名字">
         <span class="form-item-show">
-          {{ form.tName }}
+          {{ form.teaName }}
         </span>
       </el-form-item>
       <el-form-item label="科目">
         <span class="form-item-show">
-          {{ form.subject }}
+          {{ form.teaSubject }}
         </span>
       </el-form-item>
     </el-form>

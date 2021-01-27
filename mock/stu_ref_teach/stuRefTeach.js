@@ -22,9 +22,9 @@ function initMockDataStage1() {
       'id|+1': 1,
       'stuId|1-20': 1,
       'teacherId|1-20': 1,
-      'sName': '@word(1, 10)',
-      'tName': '@word(1, 10)',
-      'subject': '@word(1, 10)'
+      'stuName': '@word(1, 10)',
+      'teaName': '@word(1, 10)',
+      'teaSubject': '@word(1, 10)'
     }]
   })
 }

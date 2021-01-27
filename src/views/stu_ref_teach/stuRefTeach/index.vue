@@ -19,13 +19,13 @@
                    :value="item.key">
         </el-option>
       </el-select>
-      <el-input v-model="query.sName" placeholder="姓名"
+      <el-input v-model="query.stuName" placeholder="姓名"
                 style="width: 200px;" class="filter-item"
                 @keyup.enter.native="handleQuery"/>
-      <el-input v-model="query.tName" placeholder="名字"
+      <el-input v-model="query.teaName" placeholder="名字"
                 style="width: 200px;" class="filter-item"
                 @keyup.enter.native="handleQuery"/>
-      <el-input v-model="query.subject" placeholder="科目"
+      <el-input v-model="query.teaSubject" placeholder="科目"
                 style="width: 200px;" class="filter-item"
                 @keyup.enter.native="handleQuery"/>
       <el-button class="filter-item" icon="el-icon-search" type="primary"
@@ -69,24 +69,24 @@
         </template>
       </el-table-column>
       <el-table-column label="姓名"
-                       prop="sName"
+                       prop="stuName"
                        align="center" width="150">
         <template slot-scope="{row}">
-          <span>{{ row.sName }}</span>
+          <span>{{ row.stuName }}</span>
         </template>
       </el-table-column>
       <el-table-column label="名字"
-                       prop="tName"
+                       prop="teaName"
                        align="center" width="150">
         <template slot-scope="{row}">
-          <span>{{ row.tName }}</span>
+          <span>{{ row.teaName }}</span>
         </template>
       </el-table-column>
       <el-table-column label="科目"
-                       prop="subject"
+                       prop="teaSubject"
                        align="center" width="100">
         <template slot-scope="{row}">
-          <span>{{ row.subject }}</span>
+          <span>{{ row.teaSubject }}</span>
         </template>
       </el-table-column>
       <el-table-column label="操作" align="center" width="230">
