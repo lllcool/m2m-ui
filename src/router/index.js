@@ -126,6 +126,30 @@ export const constantRoutes = [
       }
     ]
   },
+  {
+    path: '/teama',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'Teama',
+        component: () => import('@/views/teama/teama'),
+        meta: { title: 'teama管理', icon: 'table' }
+      }
+    ]
+  },
+  {
+    path: '/teamGroup',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'TeamGroup',
+        component: () => import('@/views/teamgroup/teamGroup'),
+        meta: { title: 'teamGroup管理', icon: 'table' }
+      }
+    ]
+  },
 
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
