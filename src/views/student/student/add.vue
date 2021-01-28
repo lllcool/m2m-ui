@@ -3,7 +3,7 @@
     <el-form ref="dataForm" :rules="formRules" :model="form"
              label-position="left" size="small"
              label-width="100px" style="width: 400px; margin-left:50px;">
-      <el-form-item label="姓名" prop="name">
+      <el-form-item label="学生姓名" prop="name">
         <el-input v-model="form.name"/>
       </el-form-item>
       <el-form-item label="年龄" prop="age">
@@ -41,7 +41,7 @@ export default {
       formVisible: false,
       formRules: {
         name: [
-          { required: true, message: '请输入姓名', trigger: 'blur' },
+          { required: true, message: '请输入学生姓名', trigger: 'blur' },
           { max: 32, message: '长度不能超过32个字符', trigger: 'blur' }
         ],
         age: [

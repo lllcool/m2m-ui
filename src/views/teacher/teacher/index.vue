@@ -4,7 +4,7 @@
       <el-input v-model="query.subject" placeholder="科目"
                 style="width: 200px;" class="filter-item"
                 @keyup.enter.native="handleQuery"/>
-      <el-input v-model="query.teacherName" placeholder="名字"
+      <el-input v-model="query.teacherName" placeholder="老师姓名"
                 style="width: 200px;" class="filter-item"
                 @keyup.enter.native="handleQuery"/>
       <el-button class="filter-item" icon="el-icon-search" type="primary"
@@ -47,7 +47,7 @@
           <span>{{ row.subject }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="名字"
+      <el-table-column label="老师姓名"
                        prop="teacherName"
                        align="center" width="150">
         <template slot-scope="{row}">

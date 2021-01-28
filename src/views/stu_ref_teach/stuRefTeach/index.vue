@@ -19,10 +19,10 @@
                    :value="item.key">
         </el-option>
       </el-select>
-      <el-input v-model="query.stuName" placeholder="姓名"
+      <el-input v-model="query.stuName" placeholder="学生姓名"
                 style="width: 200px;" class="filter-item"
                 @keyup.enter.native="handleQuery"/>
-      <el-input v-model="query.teaName" placeholder="名字"
+      <el-input v-model="query.teaName" placeholder="老师姓名"
                 style="width: 200px;" class="filter-item"
                 @keyup.enter.native="handleQuery"/>
       <el-input v-model="query.teaSubject" placeholder="科目"
@@ -68,14 +68,14 @@
           <span>{{ row.teacherId }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="姓名"
+      <el-table-column label="学生姓名"
                        prop="stuName"
                        align="center" width="150">
         <template slot-scope="{row}">
           <span>{{ row.stuName }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="名字"
+      <el-table-column label="老师姓名"
                        prop="teaName"
                        align="center" width="150">
         <template slot-scope="{row}">

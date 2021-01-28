@@ -6,7 +6,7 @@
       <el-form-item label="科目" prop="subject">
         <el-input v-model="form.subject"/>
       </el-form-item>
-      <el-form-item label="名字" prop="teacherName">
+      <el-form-item label="老师姓名" prop="teacherName">
         <el-input v-model="form.teacherName"/>
       </el-form-item>
     </el-form>

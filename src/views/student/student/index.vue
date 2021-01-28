@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <el-input v-model="query.name" placeholder="姓名"
+      <el-input v-model="query.name" placeholder="学生姓名"
                 style="width: 200px;" class="filter-item"
                 @keyup.enter.native="handleQuery"/>
       <el-input v-model="query.age" placeholder="年龄"
@@ -40,7 +40,7 @@
           <span>{{ row.id }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="姓名"
+      <el-table-column label="学生姓名"
                        prop="name"
                        align="center" width="150">
         <template slot-scope="{row}">

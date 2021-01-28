@@ -13,7 +13,7 @@
           {{ form.subject }}
         </span>
       </el-form-item>
-      <el-form-item label="名字">
+      <el-form-item label="老师姓名">
         <span class="form-item-show">
           {{ form.teacherName }}
         </span>

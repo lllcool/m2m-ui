@@ -8,12 +8,12 @@
           {{ form.id }}
         </span>
       </el-form-item>
-      <el-form-item label="姓名">
+      <el-form-item label="学生姓名">
         <span class="form-item-show">
           {{ form.stuName }}
         </span>
       </el-form-item>
-      <el-form-item label="名字">
+      <el-form-item label="老师姓名">
         <span class="form-item-show">
           {{ form.teaName }}
         </span>
