@@ -2,8 +2,6 @@ import Mock from 'mockjs'
 import { param2Obj } from '../src/utils'
 
 import _user from './_user'
-import invoice from './invoice/invoice'
-import invoiceDetail from './invoicedetail/invoiceDetail'
 import teacher from './teacher/teacher'
 import student from './student/student'
 import stuRefTeach from './sturefteach/stuRefTeach'
@@ -12,16 +10,12 @@ import teama from './teama/teama'
 import teamGroup from './teamgroup/teamGroup'
 
 function initMockData() {
-  invoice.initMockDataStage1()
-  invoiceDetail.initMockDataStage1()
   teacher.initMockDataStage1()
   student.initMockDataStage1()
   stuRefTeach.initMockDataStage1()
   ball.initMockDataStage1()
   teama.initMockDataStage1()
   teamGroup.initMockDataStage1()
-  invoice.initMockDataStage2()
-  invoiceDetail.initMockDataStage2()
   teacher.initMockDataStage2()
   student.initMockDataStage2()
   stuRefTeach.initMockDataStage2()
@@ -32,8 +26,6 @@ function initMockData() {
 
 const reqMocks = [
   ..._user,
-  ...invoice.reqMocks,
-  ...invoiceDetail.reqMocks,
   ...teacher.reqMocks,
   ...student.reqMocks,
   ...stuRefTeach.reqMocks,

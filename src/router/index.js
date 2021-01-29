@@ -55,30 +55,6 @@ export const constantRoutes = [
     }]
   },
   {
-    path: '/invoice',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'Invoice',
-        component: () => import('@/views/invoice/invoice'),
-        meta: { title: 'Invoice管理', icon: 'table' }
-      }
-    ]
-  },
-  {
-    path: '/invoiceDetail',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'InvoiceDetail',
-        component: () => import('@/views/invoicedetail/invoiceDetail'),
-        meta: { title: 'InvoiceDetail管理', icon: 'table' }
-      }
-    ]
-  },
-  {
     path: '/teacher',
     component: Layout,
     children: [
