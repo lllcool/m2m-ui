@@ -109,7 +109,7 @@ export const constantRoutes = [
       {
         path: 'index',
         name: 'StuRefTeach',
-        component: () => import('@/views/stu_ref_teach/stuRefTeach'),
+        component: () => import('@/views/sturefteach/stuRefTeach'),
         meta: { title: 'StuRefTeach管理', icon: 'table' }
       }
     ]

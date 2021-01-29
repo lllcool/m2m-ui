@@ -17,7 +17,7 @@
   </el-dialog>
 </template>
 <script>
-import stuRefTeachApi from '@/api/stu_ref_teach/stuRefTeach'
+import stuRefTeachApi from '@/api/sturefteach/stuRefTeach'
 
 export default {
   name: 'StuRefTeachImport',

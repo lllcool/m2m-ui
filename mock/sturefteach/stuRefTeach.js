@@ -47,7 +47,7 @@ function removeById(list, id) {
   list.splice(index, 1)
 }
 
-const modulePath = 'stu_ref_teach/stuRefTeach'
+const modulePath = 'sturefteach/stuRefTeach'
 const reqMocks = [
   // 添加【StuRefTeach】
   {

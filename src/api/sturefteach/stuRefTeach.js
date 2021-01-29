@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 import { downloadBlob } from '@/utils/download'
-const apiPath = '/stu_ref_teach/stuRefTeach'
+const apiPath = '/sturefteach/stuRefTeach'
 const stuRefTeachApi = {
   /**
    * 新增【StuRefTeach】

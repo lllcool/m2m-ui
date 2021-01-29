@@ -1,5 +1,5 @@
 <template>
-  <el-dialog title="新建StuRefTeach" :visible.sync="formVisible">
+  <el-dialog title="编辑StuRefTeach" :visible.sync="formVisible">
     <el-form ref="dataForm" :rules="formRules" :model="form"
              label-position="left" size="small"
              label-width="100px" style="width: 400px; margin-left:50px;">
@@ -31,7 +31,7 @@
         取消
       </el-button>
       <el-button type="primary"
-                 @click="doCreate()">
+                 @click="doUpdate()">
         确认
       </el-button>
     </div>
@@ -39,12 +39,13 @@
 </template>
 
 <script>
-import stuRefTeachApi from '@/api/stu_ref_teach/stuRefTeach'
+import stuRefTeachApi from '@/api/sturefteach/stuRefTeach'
 import studentApi from '@/api/student/student'
 import teacherApi from '@/api/teacher/teacher'
 
 function initFormBean() {
   const formBean = {
+    id: null,
     stuId: null,
     teacherId: null
   }
@@ -52,13 +53,14 @@ function initFormBean() {
 }
 
 export default {
-  name: 'StuRefTeachAdd',
+  name: 'StuRefTeachEdit',
   data() {
     return {
       options: {
         student: [],
         teacher: []
       },
+      old: initFormBean(),
       form: initFormBean(),
       formVisible: false,
       formRules: {
@@ -74,30 +76,36 @@ export default {
      * 重置表单
      */
     resetForm() {
-      this.form = initFormBean()
+      for (const key in initFormBean()) {
+        this.form[key] = this.old[key]
+      }
     },
     /**
-     * 打开新建表单
+     * 打开编辑表单
      */
-    handleCreate() {
-      this.resetForm()
+    handleUpdate(id) {
       studentApi.findOptions().then(data => { this.options.student = data })
       teacherApi.findOptions().then(data => { this.options.teacher = data })
-      this.formVisible = true
-      this.$nextTick(() => {
-        this.$refs['dataForm'].clearValidate()
-      })
+      stuRefTeachApi.fetchById(id)
+        .then(data => {
+          this.old = data
+          this.resetForm()
+          this.formVisible = true
+          this.$nextTick(() => {
+            this.$refs['dataForm'].clearValidate()
+          })
+        })
     },
     /**
-     * 执行新建操作
+     * 执行修改操作
      */
-    doCreate() {
+    doUpdate() {
       this.$refs['dataForm'].validate()
-        .then(() => stuRefTeachApi.create(this.form))
+        .then(() => stuRefTeachApi.update(this.form))
         .then(data => {
           this.formVisible = false
-          this.$common.showMsg('success', '创建成功')
-          this.$emit('created', data)
+          this.$common.showMsg('success', '修改成功')
+          this.$emit('updated', data)
         })
     }
   }
